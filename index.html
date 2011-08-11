@@ -13,7 +13,7 @@
 		<div id="container">
 			<h1 class="title" id="top">General Recreational Activity Feed Specification</h1>
 			<p class="text">
-				<b>Revised August 3, 2011</b><br/><br/>
+				<b>Revised August 11, 2011</b><br/><br/>
 				The General Recreational Activity Feed Specification defines a common format for identifying water resources and their associated schedules.  This document explains the specification in detail and is a work in progress.  We value any feedback you might have to improve the specification and do not gaurantee that things won't change without notice.
 			</p>
 			<br/>
@@ -30,7 +30,9 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;<a href="#resources_txt" class="sub">resources.txt</a><br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;<a href="#activities_txt" class="sub">activites.txt</a><br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;<a href="#activity_times_txt" class="sub">activity_times.txt</a><br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<a href="#activity_exceptions_txt" class="sub">activity_exceptions.txt</a>
+					&nbsp;&nbsp;&nbsp;&nbsp;<a href="#activity_exceptions_txt" class="sub">activity_exceptions.txt</a><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<a href="#fees_txt" class="sub">fees.txt</a><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<a href="#fee_classes_txt" class="sub">fee_classes.txt</a>
 				</li>
 				<li><a href="#sample">Sample Data</a></li>
 			</ol>
@@ -83,6 +85,12 @@
 					<li>
 						<b><a href="#activity_exceptions_txt">activity_exceptions.txt</a></b> - <b>Optional</b>.  This file contains any service exceptions that may arise due to inconsistents events (holidays, etc) affecting an activity's availability.
 					</li>
+					<li>
+						<b><a href="#fees_txt">fees.txt</a></b> - <b>Required</b>.  This file contains the single use fee structures associated with your agency's activities.
+					</li>
+					<li>
+						<b><a href="#fee_classes_txt">fee_classes.txt</a></b> - <b>Required</b>.  This file contains composition of fees in order to ease querying.
+					</li>
 				</ul>
 			</p>
 
@@ -114,6 +122,8 @@
 							<li>activities.txt</li>
 							<li>activity_times.txt</li>
 							<li>activity_exceptions.txt</li>
+							<li>fees.txt</li>
+							<li>fee_classes.txt</li>
 						</ul>
 					</li>
 					<li>Zip the files in your feed.</li>
@@ -203,6 +213,10 @@
 				<tr>
 					<td>activity_name</td>
 					<td><b>Required</b>.  The <b>activity_name</b> field is the name of the activity that will be displayed to the end user.</td>
+				</tr>
+				<tr>
+					<td>fee_class</td>
+					<td><b>Required</b>.  The <b>fee_class</b> field references a fee class as defined in <a href="#fee_classes_txt">fee_classes.txt</a> which describes the fees associated with this activity.</td>
 				</tr>
 			</table>
 
@@ -336,12 +350,27 @@
 				</tr>
 				<tr>
 					<td>activity_times_id</td>
-					<td><b>Required</b>.  The <b>activity_times_id</b> field contains the ID of the activity_time you want to make an exception for.</td>
+					<td><b>Optional</b>.  The <b>activity_times_id</b> field contains the ID of the activity_time you want to make an exception for.<br/>
+					<div class="note"><b>Note:</b>&nbsp;One of <b>activity_times_id</b>, <b>activity_id</b>, <b>resource_id</b> must be supplied or else the data will fail to validate.</div>
+					</td>
 				</tr>
 				<tr>
-					<td>date</td>
-					<td><b>Required</b>.  The <b>date</b> field specifies a particular date when the activity_time schedule is not available.  The <b>date</b> field's value should be in YYYYMMDD format.</br>
-					<div class="note"><b>Note:</b>&nbsp;In cases where an <b>activity_time</b> is being rescheduled you should add a single day entry to the activity_times file with the new timing information.
+					<td>activity_id</td>
+					<td><b>Optional</b>.  The <b>activity_id</b> field contains the ID of the activity you want to make an exception for.</td>
+				</tr>
+				<tr>
+					<td>resource_id</td>
+					<td><b>Optional</b>.  The <b>resource_id</b> field contains the ID of the resource you want to make an exception for.</td>
+				</tr>
+				<tr>
+					<td>start_date</td>
+					<td><b>Required</b>.  The <b>start_date</b> field specifies the first day on which a particular activity or resource is not available.  The <b>start_date</b> field's value should be in YYYYMMDD format.</br>
+					<div class="note"><b>Note:</b>&nbsp;In cases where an <b>activity_time</b> is being rescheduled you should add a single day entry to the activity_times file with the new timing information.</div>
+					</td>
+				</tr>
+				<tr>
+					<td>end_date</td>
+					<td><b>Required</b>.  The <b>end_date</b> field specifies the last day on which a particular activity or resource is not available.  The <b>end_date</b> field's value should be in YYYYMMDD format.
 					</td>
 				</tr>
 				<tr>
@@ -353,9 +382,53 @@
 
 			<a href="#top" class="back">Back to Top</a>
 
+			<h2 class="inline" id="fees_txt">fees.txt</h2>
+			<table>
+				<tr class="top">
+					<td width="25%">Field Name</td>
+					<td>Details</td>
+				</tr>
+				<tr>
+					<td>fee_id</td>
+					<td><b>Required</b>.  The <b>fee_id</b> field contains an ID which uniquely identifies a given fee.</td>
+				</tr>
+				<tr>
+					<td>fee_name</td>
+					<td><b>Required</b>.  The <b>fee_name</b> field contains a user facing name of the given fee.</td>
+				</tr>
+				<tr>
+					<td>fee_description</td>
+					<td><b>Required</b>.  The <b>fee_description</b> field contains a short description of the given fee.  It should really only contain the age range and any other notable information.</td>
+				</tr>
+				<tr>
+					<td>fee_cost</td>
+					<td><b>Required</b>.  The <b>fee_cost</b> field contains a double value of the price of this fee.</td>
+				</tr>
+			</table>
+
+			<a href="#top" class="back">Back to Top</a>
+
+			<h2 class="inline" id="fee_classes_txt">fee_classes.txt</h2>
+			<table>
+				<tr class="top">
+					<td width="25%">Field Name</td>
+					<td>Details</td>
+				</tr>
+				<tr>
+					<td>fee_class_id</td>
+					<td><b>Required</b>. The <b>fee_class_id</b> field contains an ID which non-uniquely indentifies the fee_class being partially defined.</td>
+				</tr>
+				<tr>
+					<td>fee_id</td>
+					<td><b>Required</b>.  The <b>fee_id</b> field contains the ID of the fee being added to a fee class.</td>
+				</tr>
+			</table>
+
+			<a href="#top" class="back">Back to Top</a>
+
 			<h2 class="title" id="sample">Sample Data</h2>
 			<p class="text">
-				Once we scrape the data from Hamilton and/or Milton we can post it here as an example.
+				You can also find a repository of real data in the public <a href="https://docs.google.com/leaf?id=0B9yJ45Q5NRsOZjVjNWI0ZTMtMDE5OC00ZWNiLThmNDItOWM5MDQ0OTk2NWE0&hl=en_US">GRAF Google Docs Collection</a>.
 			</p>
 			<a href="#top" class="back">Back to Top</a>
 		</div>
