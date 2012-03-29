@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<title>General Recreation Activity Feed (GRAF)</title>
+    <link rel='stylesheet' type='text/css' href='bootstrap.css' />
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+    <script type='text/javascript' src='bootstrap.js'></script>
+    <style>
+      .pair { cursor: pointer; padding: 0px; margin: 0px; }
+      .pair:hover { background-color: white; }
+    </style>
+
+  </head>
+
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">General Recreation Activity Feed</a>
+
+          <div class='nav-collapse'>
+            <ul class="nav">
+              <li><a href="spec.html">Specification</a></li>
+              <li><a href="contribute.html">Contribute</a></li>
+              <li><a href="apps.html">Apps</a></li>
+            </ul>
+
+            <ul class="nav pull-right">
+              <li><a href="http://openhamilton.ca">Open Hamilton</a></li>
+              <li><a href="http://openlab.ca">Open Lab</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" style='margin-top: 40px; padding: 20px 0;'>
+      <div class="row">
+        <div class="span3">
+          <div class="well sidebar-nav" style='padding: 10px 15px;'>
+            <ul class="nav nav-list">
+              <li class="nav-header" style='margin-left: -30px; font-size: 1em;'>PACKAGE FILES</li>
+              <li class="active"><a href="#">package.json</a></li>
+              <li><a href="#">facilities.json</a></li>
+              <li><a href="#">resources.json</a></li>
+              <li><a href="#">activities.json</a></li>
+              <li><a href="#">activity_times.json</a></li>
+              <li><a href="#">activity_exceptions.json</a></li>
+              <li><a href="#">fees.json</a></li>
+              <li><a href="#">fee_classes.json</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="span6">
+          <pre>
+{
+  <span class="pair"><span class="key" data-req="true">"name"</span>: "City of Hamilton Water Spots"</span>,
+  <span class="pair"><span class="key" data-req="true">"license"</span>: "http://opendatacommons.org/licenses/odbl/1.0/"</span>,
+  <span class="pair"><span class="key" data-req="false">"created_at"</span>: "2012-03-29T00:00:01Z"</span>,
+  <span class="pair"><span class="key" data-req="true">"version"</span>: 1</span>,
+  <span class="pair"><span class="key" data-req="false">"municipality"</span></span>: {
+    <span class="pair"><span class="key" data-req="true">"city"</span>: "Hamilton"</span>,
+    <span class="pair"><span class="key" data-req="true">"province"</span>: "Ontario"</span>,
+    <span class="pair"><span class="key" data-req="true">"country"</span>: "Canada"</span>,
+    <span class="pair"><span class="key" data-req="false">"website"</span>: "http://www.hamilton.ca"</span>
+  },
+  <span class="pair"><span class="key" data-req="false">"schema"</span></span>: [
+    {
+      <span class="pair"><span class="key" data-req="true">"table"</span>: "resource"</span>,
+      <span class="pair"><span class="key" data-req="true">"field"</span>: "beach_conditions"</span>,
+      <span class="pair"><span class="key">"description"</span>: "Link for current conditions of a beach"</span>,
+      <span class="pair"><span class="key" data-req="true">"type"</span>: "string"</span>
+    }
+  ]
+}
+</pre>
+        </div>
+
+        <div class="span3" id='explain'>
+          <h3>GRAF Spec Explorer</h3>
+          <p>Click on properties inside the code window to learn more about their function.</p>
+
+          <p>All files inside a GRAF data set must be in JSON format and adhere to the names listed on the left-hand menu.</p>
+
+          <p></p>
+        </div>
+      </div>
+
+      <hr>
+      <footer>
+        <p>&copy;&nbsp;GRAF Contributors 2011-2012.&nbsp;&nbsp;All Rights Reserved.</p>
+      </footer>
+    </div>
+
+    <script type='text/javascript' src='hints.js'></script>
+    <script type='text/javascript'>
+      $(document).ready(function() {
+        // Todo: implement changing between files
+        $('.nav-list a').click(function(e) {
+          e.preventDefault();
+          return false;
+        });
+
+        $('.pair').click(function(e) {
+          var key = $('.key', this).html().replace(/"/g, '');
+          var contents = '<h3 style="float: left">' + key + '</h3>';
+          if ($('.key', this).data('req') === true) {
+            contents += '<span style="float: right; margin: 5px 0 4px 0;" class="label label-important">Required</span>';
+          } else {
+            contents += '<span style="float: right; margin: 5px 0 4px 0;" class="label label-info">Optional</span>';
+          }
+          contents += '<div class="clearfix"></div>' + hints[key];
+
+          $('#explain').html(contents);
+        });
+      });
+    </script>
+  </body>
+</html>
