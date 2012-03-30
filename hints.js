@@ -55,5 +55,17 @@ var hints = {
                   + "  Format of the field is YYYYMMDD.</p>",
     "end_date": "<p>Some activities may only be offered within a certain time frame and these two fields allow that.  If these values are not present it is assumed that the activities are always offered."
                   + "  Format of the field is YYYYMMDD.</p>"
+  },
+
+  "activity_exceptions": {
+    "home": "<h3>Activity Exceptions</h3>"
+  },
+
+  "fees": {
+    "home": "<h3>Fees</h3><p></p>",
+    "id": "<p>An unique integer identifying this fee.  It must only be unique among other fees within the data set.</p>",
+    "name": "<p>Name of the fee</p>",
+    "description": "<p>Short description of the fee.  It should really only contain the age range and any other notable information.</p>",
+    "cost": "<p>A double value of the price of the fee.</p>"
   }
 };
