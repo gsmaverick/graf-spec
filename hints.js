@@ -62,10 +62,16 @@ var hints = {
   },
 
   "fees": {
-    "home": "<h3>Fees</h3><p></p>",
+    "home": "<h3>Fees</h3><p>Single use fees for your activities.</p>",
     "id": "<p>An unique integer identifying this fee.  It must only be unique among other fees within the data set.</p>",
     "name": "<p>Name of the fee</p>",
     "description": "<p>Short description of the fee.  It should really only contain the age range and any other notable information.</p>",
     "cost": "<p>A double value of the price of the fee.</p>"
+  },
+
+  "fee_classes": {
+    "home": "<h3>Fee Classes</h3><p>Composition of fees to make it easier to see all fees associated with an activity easily and to make querying easier.</p>",
+    "id": "<p>An unique integer identifying this fee class.  It must only be unique among other fee classes within the data set.</p>",
+    "fees": "<p>An array of IDs linking to the fees that make up this fee class.</p>"
   }
 };
