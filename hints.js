@@ -31,9 +31,29 @@ var hints = {
   },
 
   "resources": {
-    "home": "<h3>Resources</h3><p></p>",
+    "home": "<h3>Resources</h3><p>Examples of resources would include pools, soccer fields and rinks.</p>",
     "id": "<p>An unique integer identifying this resource.  It must only be unique among other resources within the data set.</p>",
     "facility_id": "<p>Identifies the facility this resource belongs to.</p>",
     "name": "<p>Name of the resource</p>",
+  },
+
+  "activities": {
+    "home": "<h3>Activities</h3><p>Each activity is tied to a particular resource within the data set.  Examples of activities would include public swim or public skate.</p>",
+    "id": "<p>An unique integer identifying this activity.  It must only be unique among other activities within the data set.</p>",
+    "resource_id": "<p>Identifies the resource where this activity is offered.</p>",
+    "name": "<p>User-friendly name of the activity.</p>",
+    "fee_class": "<p>A reference to the fee class which describes the costs for this activity.</p>"
+  },
+
+  "activity_times": {
+    "home": "<h3>Activity Times</h3><p>Scheduling information for activities that are offered.</p>",
+    "id": "<p>An unique integer identifying this activity time.  It must only be unique among other activity times within the data set.</p>",
+    "activity_id": "<p>Identifies the activity which this time slot is being defined for.</p>",
+    "start_time": "<p>Times must be 5 digits in HH:MM format (H:MM is also accepted, if the hour begins with 0). Do not pad times with spaces.</p>",
+    "end_time": "<p>Times must be 5 digits in HH:MM format (H:MM is also accepted, if the hour begins with 0). Do not pad times with spaces.</p>",
+    "start_date": "<p>Some activities may only be offered within a certain time frame and these two fields allow that.  If these values are not present it is assumed that the activities are always offered."
+                  + "  Format of the field is YYYYMMDD.</p>",
+    "end_date": "<p>Some activities may only be offered within a certain time frame and these two fields allow that.  If these values are not present it is assumed that the activities are always offered."
+                  + "  Format of the field is YYYYMMDD.</p>"
   }
 };
